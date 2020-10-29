@@ -1,0 +1,13 @@
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\bin\Debug\netcoreapp3.1\CitysBalanceBudgetApp.exe
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\bin\Debug\netcoreapp3.1\CitysBalanceBudgetApp.deps.json
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\bin\Debug\netcoreapp3.1\CitysBalanceBudgetApp.runtimeconfig.json
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\bin\Debug\netcoreapp3.1\CitysBalanceBudgetApp.runtimeconfig.dev.json
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\bin\Debug\netcoreapp3.1\CitysBalanceBudgetApp.dll
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\bin\Debug\netcoreapp3.1\CitysBalanceBudgetApp.pdb
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\obj\Debug\netcoreapp3.1\CitysBalanceBudgetApp.csprojAssemblyReference.cache
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\obj\Debug\netcoreapp3.1\CitysBalanceBudgetApp.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\obj\Debug\netcoreapp3.1\CitysBalanceBudgetApp.AssemblyInfo.cs
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\obj\Debug\netcoreapp3.1\CitysBalanceBudgetApp.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\obj\Debug\netcoreapp3.1\CitysBalanceBudgetApp.dll
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\obj\Debug\netcoreapp3.1\CitysBalanceBudgetApp.pdb
+C:\Users\User\Desktop\git\Tutorial\CitysBalanceBudgetApp\CitysBalanceBudgetApp\obj\Debug\netcoreapp3.1\CitysBalanceBudgetApp.genruntimeconfig.cache
