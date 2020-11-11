@@ -10,5 +10,6 @@ namespace CitysBalanceBudgetApp.Models
         public string Name { get; set; }
         public double Budget { get; set; }
         public Point Point { get; set; }
+        public IEnumerable<string> neighbors { get; set; }
     }
 }

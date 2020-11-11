@@ -26,20 +26,22 @@ namespace CitysBalanceBudgetApp.Services
                     val = false;
                 }
             }
-            return val;
-        }
-        /*
-        public bool DifName(FiltrData filterData) 
-        {
-            bool val = true;
-            string[] names = new string[filterData.Cities.ToArray().Length] 
-            foreach (City city in filterData.Cities) 
-            { 
-                if (city.Name in names)   
-               
-            }
             
-         }
-        */
+            return val;
+
+        }
+        
+        //public bool DifName(FiltrData filterData) 
+        //{
+        //    bool val = true;
+        //    string[] names = new string[filterData.Cities.ToArray().Length] 
+        //    foreach (City city in filterData.Cities) 
+        //    { 
+        //        if (city.Name in names)   
+               
+        //    }
+            
+        // }
+        
      }
 };
