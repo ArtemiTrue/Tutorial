@@ -16,41 +16,44 @@ namespace CitysBalanceBudgetApp.Services
             while (a.Count>0)
             {
                 City city = a.Dequeue();
-                foreach (City i in cities)
+                for (int i = 0; i < cities.Count(); i++)
                 {
-                    if (i.Point.X == city.Point.X + 1 && (i.Point.Y != city.Point.Y + 1 || i.Point.Y != city.Point.Y - 1)) 
+                    City Value = cities.ElementAt(i);
+                    // проверяем все города и ищем соседей
+                    if (Value.Point.X == city.Point.X + 1 && (Value.Point.Y != city.Point.Y + 1 || Value.Point.Y != city.Point.Y - 1)) 
                     {
-                        //если список соседей не содержит имя города i то добовляем туда это имя
-                        if (!city.neighbors.Contains(i.Name)) 
-                        { 
-                            city.neighbors.Append(i.Name);
-                            a.Enqueue(i);
+                        // если сосед не содержит этот i то доболяем соседа в очередь
+                        if (!Value.neighbors.Contains(i)) 
+                        {
+                            a.Enqueue(Value);
                         }
+                        // добавляем в соседи этот город
+                        city.neighbors.Append(i);
 
                     }
-                    if (i.Point.X == city.Point.X - 1 && (i.Point.Y != city.Point.Y + 1 || i.Point.Y != city.Point.Y - 1))
+                    if (Value.Point.X == city.Point.X - 1 && (Value.Point.Y != city.Point.Y + 1 || Value.Point.Y != city.Point.Y - 1))
                     {
-                        if (!city.neighbors.Contains(i.Name))
+                        if (!Value.neighbors.Contains(i)) 
                         {
-                            city.neighbors.Append(i.Name);
-                            a.Enqueue(i);
+                            a.Enqueue(Value);
                         }
+                        city.neighbors.Append(i);
                     }
-                    if (i.Point.Y == city.Point.Y - 1 && (i.Point.X != city.Point.X + 1 || i.Point.X != city.Point.Y - 1))
+                    if (Value.Point.Y == city.Point.Y - 1 && (Value.Point.X != city.Point.X + 1 || Value.Point.X != city.Point.Y - 1))
                     {
-                        if (!city.neighbors.Contains(i.Name))
+                        if (!Value.neighbors.Contains(i))
                         {
-                            city.neighbors.Append(i.Name);
-                            a.Enqueue(i);
+                            a.Enqueue(Value);
                         }
+                        city.neighbors.Append(i);
                     }
-                    if (i.Point.Y == city.Point.Y + 1 && (i.Point.X != city.Point.X + 1 || i.Point.X != city.Point.X - 1))
+                    if (Value.Point.Y == city.Point.Y + 1 && (Value.Point.X != city.Point.X + 1 || Value.Point.X != city.Point.X - 1))
                     {
-                        if (!city.neighbors.Contains(i.Name))
+                        if (!Value.neighbors.Contains(i))
                         {
-                            city.neighbors.Append(i.Name);
-                            a.Enqueue(i);
+                            a.Enqueue(Value);
                         }
+                        city.neighbors.Append(i);
                     }
                 }
                 return cities;
@@ -61,42 +64,22 @@ namespace CitysBalanceBudgetApp.Services
             IEnumerable<City> cities = filtrData.Cities;
             for (int i = 0; i < filtrData.Options.Iterations; i++) 
             { 
-                
+                // отнимаем бюджет который надо отнять
+                foreach (City city in filtrData.Cities) 
+                {
+                    city.BudgetForNeighbors = city.Budget / filtrData.Options.PercentBet;
+                    city.Budget -= city.BudgetForNeighbors * city.neighbors.Count();
+                }
+                foreach (City city in filtrData.Cities) 
+                { 
+                    foreach(int index in city.neighbors) 
+                    {
+                        // добавляем бюджет от соседей
+                        city.Budget += cities.ElementAt(index).BudgetForNeighbors;
+                    }
+                }
             }
-                //City[] cities = filtrData.Cities.ToArray();
-                //double[] minMaxBuget = new double[2] {0 , cities[0].Budget};
-                //int[] minMaxName = new int[2] { 0, 0 };
-
-                //for (int i = 0; i < filtrData.Options.Iterations; i++) 
-                //{
-                //    // 
-                //    double oneIterBet = 0;
-                //    for ( int index = 0; index < cities.Length; index++) 
-                //    { 
-
-                //        if (cities[index].Budget < minMaxBuget[1]) 
-                //        {
-                //            minMaxBuget[1] = cities[index].Budget;
-                //            minMaxName[1] = index;
-                //        }
-                //        if (cities[index].Budget > minMaxBuget[0])
-                //        {
-                //            minMaxBuget[0] = cities[index].Budget;
-                //            minMaxName[0] = index;
-                //        }
-                //        cities[index].Budget = cities[index].Budget -(cities[index].Budget * filtrData.Options.PercentBet);
-                //        oneIterBet = oneIterBet + cities[index].Budget * filtrData.Options.PercentBet;
-
-                //    }
-                //    oneIterBet = oneIterBet / cities.Length;
-                //    cities[minMaxName[0]].Budget = cities[minMaxName[0]].Budget - cities[minMaxName[0]].Budget * filtrData.Options.PercentReach;
-                //    cities[minMaxName[1]].Budget = cities[minMaxName[1]].Budget + cities[minMaxName[1]].Budget * filtrData.Options.PercentReach;
-                //    foreach (City city in cities) 
-                //    {
-                //        city.Budget = city.Budget + oneIterBet;
-                //    }
-                //}
-                return cities;
+            return cities;
         }
     }
 }
