@@ -24,7 +24,6 @@ namespace CitysBalanceBudgetApp.Controllers
             if (!_validator.DifName(filtrData))
                 throw new Exception("данные не валидны");
             */
-            filtrData.Cities = _service.SherchNewNeighbors(filtrData.Cities);
             IEnumerable<City> result = _service.Filter(filtrData);
             return result;
 

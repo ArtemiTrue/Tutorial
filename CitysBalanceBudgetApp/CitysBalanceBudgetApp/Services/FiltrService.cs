@@ -56,9 +56,11 @@ namespace CitysBalanceBudgetApp.Services
                         city.neighbors.Append(i);
                     }
                 }
-                return cities;
+                
             }
+            return cities;
         }
+
         public IEnumerable<City> Filter(FiltrData filtrData)
         {
             IEnumerable<City> cities = filtrData.Cities;
