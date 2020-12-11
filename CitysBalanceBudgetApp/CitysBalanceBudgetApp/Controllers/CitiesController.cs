@@ -20,10 +20,8 @@ namespace CitysBalanceBudgetApp.Controllers
         {
             if (!_validator.IsValid(filtrData))
                 throw new Exception("данные не валидны");
-            /*
-            if (!_validator.DifName(filtrData))
-                throw new Exception("данные не валидны");
-            */
+            //if (!_validator.DifName(filtrData))
+            //    throw new Exception("данные не валидны");
             IEnumerable<City> result = _service.Filter(filtrData);
             return result;
 

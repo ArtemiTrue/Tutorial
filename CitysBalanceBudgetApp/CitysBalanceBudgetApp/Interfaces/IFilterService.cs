@@ -8,6 +8,5 @@ namespace CitysBalanceBudgetApp.Interfaces
     public interface IFilterService
     {
         IEnumerable<City> Filter(FiltrData filtrData);
-        IEnumerable<City> SherchNewNeighbors(IEnumerable<City> cities);
     }
 }
