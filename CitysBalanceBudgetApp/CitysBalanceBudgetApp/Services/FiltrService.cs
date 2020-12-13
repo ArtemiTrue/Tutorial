@@ -2,6 +2,7 @@
 using CitysBalanceBudgetApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -21,8 +22,10 @@ namespace CitysBalanceBudgetApp.Services
                 {
                     City Value = cities.ElementAt(i);
                     // проверяем все города и ищем соседей
-                    if (Value.Point.Add(Value.Point, new Size(1, 0)) == city.Point || Value.Point.Add(Value.Point, new Size(-1, 0)) == city.Point ||
-                        Value.Point.Add(Value.Point, new Size(0, 1)) == city.Point || Value.Point.Add(Value.Point, new Size(0, -1)) == city.Point)
+                    if (Point.Add(Value.Point, new Size(1, 0)) == city.Point ||
+                        Point.Add(Value.Point, new Size(-1, 0)) == city.Point ||
+                        Point.Add(Value.Point, new Size(0, 1)) == city.Point ||
+                        Point.Add(Value.Point, new Size(0, -1)) == city.Point)
                     {
                         // если сосед не содержит этот i то доболяем соседа в очередь
                         if (!Value.neighbors.Contains(i))
