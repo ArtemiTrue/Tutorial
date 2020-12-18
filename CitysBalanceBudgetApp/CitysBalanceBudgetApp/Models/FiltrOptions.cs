@@ -8,7 +8,6 @@ namespace CitysBalanceBudgetApp.Models
     {
         public int Iterations { get; set; }
         public double PercentBet { get; set; }
-        public double PercentReach { get; set; }
         
     }
 }

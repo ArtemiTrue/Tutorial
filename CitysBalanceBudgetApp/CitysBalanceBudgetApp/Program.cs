@@ -23,13 +23,15 @@ namespace CitysBalanceBudgetApp
             {
                 Cities = new City[]
                 {
-                    new City { Budget = 1000, Name = "mmmm", Point = new Point { X = 1, Y = 1 }}
+                    new City { Budget = 1000, Name = "Moscow", Point = new Point { X = 1, Y = 1 }},
+                    new City { Budget = 700, Name = "Piter", Point = new Point { X = 1, Y = 2 }},
+                    new City { Budget = 300, Name = "Tver", Point = new Point { X = 2, Y = 1 }}
+
                 },
                 Options = new FiltrOptions
                 {
-                    Iterations = 100,
-                    PercentBet = 0.06,
-                    PercentReach = 0.03
+                    Iterations = 12,
+                    PercentBet = 0.06
                 }
             };
             citiesController.FiltrData(data);

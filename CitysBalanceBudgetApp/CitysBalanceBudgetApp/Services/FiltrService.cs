@@ -13,27 +13,27 @@ namespace CitysBalanceBudgetApp.Services
         public IEnumerable<City> Filter(FiltrData filtrData)
         {
             IEnumerable<City> cities = filtrData.Cities;
-            Queue<City> a = new Queue<City>();
-            a.Enqueue(cities.ElementAt(0));
+            Queue<int> a = new Queue<int>();
+            a.Enqueue(0);
             while (a.Count > 0)
             {
-                City city = a.Dequeue();
+                int IndexOfThis = a.Dequeue();
                 for (int i = 0; i < cities.Count(); i++)
                 {
                     City Value = cities.ElementAt(i);
                     // проверяем все города и ищем соседей
-                    if (Point.Add(Value.Point, new Size(1, 0)) == city.Point ||
-                        Point.Add(Value.Point, new Size(-1, 0)) == city.Point ||
-                        Point.Add(Value.Point, new Size(0, 1)) == city.Point ||
-                        Point.Add(Value.Point, new Size(0, -1)) == city.Point)
+                    if (Point.Add(Value.Point, new Size(1, 0)) == cities.ElementAt(IndexOfThis).Point ||
+                        Point.Add(Value.Point, new Size(-1, 0)) == cities.ElementAt(IndexOfThis).Point ||
+                        Point.Add(Value.Point, new Size(0, 1)) == cities.ElementAt(IndexOfThis).Point ||
+                        Point.Add(Value.Point, new Size(0, -1)) == cities.ElementAt(IndexOfThis).Point)
                     {
                         // если сосед не содержит этот i то доболяем соседа в очередь
                         if (!Value.neighbors.Contains(i))
                         {
-                            a.Enqueue(Value);
+                            a.Enqueue(cities.IndexOf(Value));
                         }
                         // добавляем в соседи этот город
-                        city.neighbors.Append(i);
+                        cities.ElementAt(IndexOfThis).neighbors.Append(i);
                     }
                 }
 
