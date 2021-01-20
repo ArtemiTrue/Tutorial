@@ -8,5 +8,6 @@ namespace CitysBalanceBudgetApp.Interfaces
     public interface IFilterService
     {
         IEnumerable<City> Filter(FiltrData filtrData);
+        int IndexOfElement(IEnumerable<City> cities, City value);
     }
 }

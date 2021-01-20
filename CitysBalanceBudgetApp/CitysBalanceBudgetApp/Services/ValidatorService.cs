@@ -11,54 +11,40 @@ using System.Drawing;
 
 namespace CitysBalanceBudgetApp.Services
 {
-     public class ValidatorService: IValidator
+    public class ValidatorService: IValidator
     {
         public bool IsValid(FiltrData filterData)
         {
-            Point[] AllCoordinates = new Point[filterData.Cities.Count()];
-            if (filterData.Options.Iterations < 0) 
-            {
-                return false;
+            Point[] allCoordinates = new Point[filterData.Cities.Count()];
+            foreach (City i in filterData.Cities.ToArray()) 
+            { 
+                if (IsNameValid(i) && IsBudgetValid(i) && IsPointValid(i, allCoordinates)) { return false; }
+                allCoordinates.Append(i.Point);
             }
-            if (filterData.Options.PercentBet < 0) 
-            {
-                return false;
-            }
-                foreach (City i in filterData.Cities.ToArray()) 
-            {
-                if (i.Name == null) // (i.Point.IsEmpty)) 
-                {
-                    return false;
-                }
-                if (i.Budget < 0) 
-                {
-                    return false;
-                }
-                if (i.Point.X < 0 || i.Point.Y < 0) 
-                {
-                    return false;
-                }
-                if (AllCoordinates.Contains(i.Point)) 
-                {
-                    return false;
-                }
-            }
-            
-            return true;
-
+            return IsOptionsValid(filterData);
         }
-        
-        //public bool DifName(FiltrData filterData) 
-        //{
-        //    bool val = true;
-        //    string[] names = new string[filterData.Cities.ToArray().Length] 
-        //    foreach (City city in filterData.Cities) 
-        //    { 
-        //        if (city.Name in names)   
-               
-        //    }
-            
-        // }
-        
-     }
+        private bool IsNameValid(City city)
+        {
+            return string.IsNullOrEmpty(city.Name);
+        }
+        private bool IsBudgetValid(City city)
+        {
+            return (city.Budget < 0);
+        }
+        private bool IsPointValid(City city,Point[] allCoordinates) 
+        { 
+            return (city.Point.X < 0 && city.Point.Y < 0 && allCoordinates.Contains(city.Point));
+        }
+        private bool IsOptionsValid(FiltrData data) 
+        {
+            return (data.Options.Iterations > 0 || data.Options.PercentBet > 0 || data.Options.PercentBet < 1);
+        }
+    }
 };
+//var testResult = filterData.Cities.Any(
+//    city => string.IsNullOrEmpty(city.Name) 
+//    || city.Budget < 0 
+//    || city.Point.X < 0 
+//    || city.Point.Y < 0 
+//    || allCoordinates.Contains(city.Point));
+//return !testResult;

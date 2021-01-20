@@ -14,8 +14,6 @@ namespace CitysBalanceBudgetApp
         {
 
 
-            City Aa = new City();
-
             ValidatorService validatorService = new ValidatorService();
             FiltrService filtrService = new FiltrService();
             CitiesController citiesController = new CitiesController(validatorService,filtrService);

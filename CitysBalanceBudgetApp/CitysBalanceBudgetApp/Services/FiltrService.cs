@@ -20,27 +20,28 @@ namespace CitysBalanceBudgetApp.Services
                 int IndexOfThis = a.Dequeue();
                 for (int i = 0; i < cities.Count(); i++)
                 {
-                    City Value = cities.ElementAt(i);
+                    City value = cities.ElementAt(i);
                     // проверяем все города и ищем соседей
-                    if (Point.Add(Value.Point, new Size(1, 0)) == cities.ElementAt(IndexOfThis).Point ||
-                        Point.Add(Value.Point, new Size(-1, 0)) == cities.ElementAt(IndexOfThis).Point ||
-                        Point.Add(Value.Point, new Size(0, 1)) == cities.ElementAt(IndexOfThis).Point ||
-                        Point.Add(Value.Point, new Size(0, -1)) == cities.ElementAt(IndexOfThis).Point)
+                    if (Point.Add(value.Point, new Size(1, 0)) == cities.ElementAt(IndexOfThis).Point ||
+                        Point.Add(value.Point, new Size(-1, 0)) == cities.ElementAt(IndexOfThis).Point ||
+                        Point.Add(value.Point, new Size(0, 1)) == cities.ElementAt(IndexOfThis).Point ||
+                        Point.Add(value.Point, new Size(0, -1)) == cities.ElementAt(IndexOfThis).Point)
                     {
                         // если сосед не содержит этот i то доболяем соседа в очередь
-                        if (!Value.neighbors.Contains(i))
-                        {
-                            a.Enqueue(cities.IndexOf(Value));
-                        }
+                        //if (value.neighbors.Count() == 0) // !value.neighbors.Contains(i))
+                        //{
+                        //    a.Enqueue(IndexOfElement(cities, value));
+                        //}
                         // добавляем в соседи этот город
+                        a.Enqueue(IndexOfElement(cities, value));
                         cities.ElementAt(IndexOfThis).neighbors.Append(i);
                     }
                 }
 
             }
             
-            for (int i = 0; i < filtrData.Options.Iterations; i++) 
-            { 
+            for (int i = 0; i < filtrData.Options.Iterations; i++)
+            {
                 // отнимаем бюджет который надо отнять
                 foreach (City city in cities) 
                 {
@@ -57,6 +58,17 @@ namespace CitysBalanceBudgetApp.Services
                 }
             }
             return cities;
+        } 
+        public int IndexOfElement(IEnumerable<City> cities, City value) 
+        {
+            for (int i = 0; i < cities.Count(); i++) 
+            {
+                if (cities.ElementAt(i) == value) 
+                {
+                    return i;
+                }
+            }
+            return 1;
         }
     }
 }
