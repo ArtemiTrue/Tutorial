@@ -10,9 +10,8 @@ namespace CitysBalanceBudgetApp.Services
 {
     public class FiltrService : IFilterService
     {
-        public IEnumerable<City> Filter(FiltrData filtrData)
+        public IEnumerable<City> SherchNeighbor(IEnumerable<City> cities)
         {
-            IEnumerable<City> cities = filtrData.Cities;
             Queue<int> a = new Queue<int>();
             a.Enqueue(0);
             while (a.Count > 0)
@@ -37,28 +36,45 @@ namespace CitysBalanceBudgetApp.Services
                         cities.ElementAt(IndexOfThis).neighbors.Append(i);
                     }
                 }
-
             }
-            
+            return cities;
+        }
+        public IEnumerable<City> Filter(FiltrData filtrData) 
+        {
+            IEnumerable<City> cities = SherchNeighbor(filtrData.Cities);
+            double[] BudgetForNeighbors = new double[cities.Count()];
             for (int i = 0; i < filtrData.Options.Iterations; i++)
             {
                 // отнимаем бюджет который надо отнять
-                foreach (City city in cities) 
+                for (int count = 0; count < cities.Count(); count++)
                 {
-                    city.BudgetForNeighbors = city.Budget / filtrData.Options.PercentBet;
-                    city.Budget -= city.BudgetForNeighbors * city.neighbors.Count();
+                    BudgetForNeighbors[count] = cities.ElementAt(count).Budget / filtrData.Options.PercentBet;
+                    cities.ElementAt(count).Budget -= BudgetForNeighbors[count] * cities.ElementAt(count).neighbors.Count();
                 }
-                foreach (City city in cities) 
-                { 
-                    foreach(int index in city.neighbors) 
-                    {
-                        // добавляем бюджет от соседей
-                        city.Budget += cities.ElementAt(index).BudgetForNeighbors;
-                    }
-                }
+                cities = GiveBudget(cities, BudgetForNeighbors);
             }
             return cities;
         } 
+        private IEnumerable<City> TakeBudget(IEnumerable<City> cities, double[] BudgetForNeighbors,double percentBet) 
+        {
+            for (int count = 0; count < cities.Count(); count++)
+            {
+                BudgetForNeighbors[count] = cities.ElementAt(count).Budget / percentBet;
+                cities.ElementAt(count).Budget -= BudgetForNeighbors[count] * cities.ElementAt(count).neighbors.Count();
+            }
+            return cities;
+        }
+        private IEnumerable<City> GiveBudget(IEnumerable<City> cities, double[] BudgetForNeighbors) 
+        {
+            for (int count = 0; count < cities.Count(); count++)
+            {
+                foreach (int index in cities.ElementAt(count).neighbors)
+                {
+                    cities.ElementAt(count).Budget += BudgetForNeighbors[count];
+                }
+            }
+            return cities;
+        }
         public int IndexOfElement(IEnumerable<City> cities, City value) 
         {
             for (int i = 0; i < cities.Count(); i++) 
